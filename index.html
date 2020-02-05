@@ -30,7 +30,6 @@ window.addEventListener("load",function() {
     let terms = words.map(word => "intext:" + word);
     let query = "site:" + site + " ( " + terms.join(" | ") + " )";
     let uri = "https://www.google.com/search?q=" + encodeURIComponent(query);
-    alert(uri);
     window.open(uri);
   });
 });
