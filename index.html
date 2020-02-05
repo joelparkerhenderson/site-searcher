@@ -15,14 +15,22 @@
 <br>Site hostname:
 <br><input id="site" type="text" value="www.example.com" size="60">
 <br>
-<br>Searh words:
+<br>Search words:
 <br><textarea id="words" rows="5" cols="60">hello world</textarea>
 <br>
 <br><button type="submit">Submit</button>
 </form>
 
 <script>
+
+function init() {
+  let params = new URLSearchParams(window.location.search);
+  document.getElementById("site").value = params.get("site") || "www.example.com"
+  document.getElementById("words").innerHTML = params.get("words") || "hello world";
+}
+
 window.addEventListener("load",function() {
+  init();
   document.getElementById('searcher').addEventListener("submit",function(e) {
     e.preventDefault(); // before the code
     let site = document.getElementById("site").value.trim();
@@ -33,6 +41,7 @@ window.addEventListener("load",function() {
     window.open(uri);
   });
 });
+
 </script>
 
 </body>
