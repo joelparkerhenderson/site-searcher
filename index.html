@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Site searcher</title>
+  <style>
+  body {
+  	font-family: sans-serif;
+  }
+  </style>
+</head>
+<body>
+<h1>Site searcher</h1>
+
+<form id="searcher">
+<br>Website URL:
+<br><input id="site" type="text" value="www.example.com">
+<br>
+<br>Words to find:
+<br><input id="words" type="text" value="hello world" size="60">
+<br>
+<br><button type="submit">Submit</button>
+</form>
+
+<script>
+window.addEventListener("load",function() {
+  document.getElementById('searcher').addEventListener("submit",function(e) {
+    e.preventDefault(); // before the code
+    let site = document.getElementById("site").value.trim();
+    let words = document.getElementById("words").value.trim().replace(/,/g, " ").replace(/\t/g, " ").replace(/  +/g, " ").split(" ");
+    let terms = words.map(word => "intext:" + word);
+    let query = "site:" + site + " ( " + terms.join(" | ") + " )";
+    let uri = "https://www.google.com/search?q=" + encodeURIComponent(query);
+    alert(uri);
+    window.open(uri);
+  });
+});
+</script>
+
+</body>
+</html>
